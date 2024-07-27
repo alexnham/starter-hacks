@@ -3,25 +3,27 @@ const User = require('../models/User')
 
 const signup = async (req, res) => {
     try {
+    
     const {firstName, lastName, username, password, email} = req.body
-
+    
     const oldUser = await User.findOne({email:email})
-
     if(oldUser) {
         res.send({status: "error", data: "user already exists"})
     }
     const salt = await bcrypt.genSalt(10)
     const encryptedPassword = await bcrypt.hash(password, salt)
-        await User.create({
-            firstName,
-            lastName,
-            username,
+       await User.create({
+            firstName:firstName,
+            lastName:lastName,
+            username:username,
             password: encryptedPassword,
-            email
+            email:email,
+            tasks: [],
+            streak: 0
         })
-        res.send({status: "ok", data: "User created"});
+        res.send(200).send(username);
     } catch(error) {
-        res.send({status: "error", data: error})
+        res.status(404).send(e)
     }
 }
 
