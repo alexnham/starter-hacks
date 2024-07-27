@@ -15,7 +15,6 @@ const addCommunityTask = async (req, res) => {
 
 const getCommunityTask = async (req, res) => {
     const {name} = req.body
-
     try {
         const communityTask = await CommunityTask.findOne({name})
         res.status(200).json(communityTask)

@@ -36,10 +36,9 @@ const userSchema = new Schema({
             default: "Incomplete"
     }
     }],
-    first: {
-        type: String,
+    streak: {
+        type: Number,
         required: true,
-        unique
     },
 
 }, {timestamps: true})
