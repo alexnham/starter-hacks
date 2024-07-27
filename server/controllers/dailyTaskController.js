@@ -4,7 +4,7 @@ const addDailyTask = async (req, res) => {
     const {name, points} = req.body
 
     try {
-        const newDailyTask = await CommunityTask.create({name, points, value, timesCompleted:0, goal})
+        const newDailyTask = await CommunityTask.create({name, description, points})
         res.status(200).json(newDailyTask)
     } catch(e) {
         res.status(404).json("Error", e)
