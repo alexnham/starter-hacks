@@ -1,82 +1,82 @@
 [
     {
-      "task": "Community Walk 1000 km",
+      "name": "Community Walk 1000 km",
       "userContribution": "Walk 2 km",
-      "carbonEmissionSaved": "860 g CO2 per participant",
+      "description": "860 g CO2 per participant",
       "points": 860,
-      "timeCompleted": 0,
+      "timesCompleted": 0,
       "goal": 430000
     },
     {
-      "task": "Community Clean-Up 1000 kg of Waste",
+      "name": "Community Clean-Up 1000 kg of Waste",
       "userContribution": "Clean-Up 10 kg of Waste",
-      "carbonEmissionSaved": "8000 g CO2 per participant",
+      "description": "8000 g CO2 per participant",
       "points": 8000,
-      "timeCompleted": 0,
+      "timesCompleted": 0,
       "goal": 800000
     },
     {
-      "task": "Community Plant 100 Trees",
+      "name": "Community Plant 100 Trees",
       "userContribution": "Plant 1 Tree",
-      "carbonEmissionSaved": "21000 g CO2 per participant per year",
+      "description": "21000 g CO2 per participant per year",
       "points": 21000,
-      "timeCompleted": 0,
+      "timesCompleted": 0,
       "goal": 2100000
     },
     {
-      "task": "Community Recycle 1000 kg of Waste",
+      "name": "Community Recycle 1000 kg of Waste",
       "userContribution": "Recycle 10 kg of Waste",
-      "carbonEmissionSaved": "8000 g CO2 per participant",
+      "description": "8000 g CO2 per participant",
       "points": 8000,
-      "timeCompleted": 0,
+      "timesCompleted": 0,
       "goal": 800000
     },
     {
-      "task": "Community Carpool 1000 km",
+      "name": "Community Carpool 1000 km",
       "userContribution": "Carpool 10 km",
-      "carbonEmissionSaved": "2000 g CO2 per participant",
+      "description": "2000 g CO2 per participant",
       "points": 2000,
-      "timeCompleted": 0,
+      "timesCompleted": 0,
       "goal": 200000
     },
     {
-      "task": "Community Save 1000 kWh of Energy",
+      "name": "Community Save 1000 kWh of Energy",
       "userContribution": "Save 10 kWh of Energy",
-      "carbonEmissionSaved": "4700 g CO2 per participant",
+      "description": "4700 g CO2 per participant",
       "points": 4700,
-      "timeCompleted": 0,
+      "timesCompleted": 0,
       "goal": 470000
     },
     {
-      "task": "Community Reduce Meat Consumption by 100 kg",
+      "name": "Community Reduce Meat Consumption by 100 kg",
       "userContribution": "Reduce Meat Consumption by 500 g",
-      "carbonEmissionSaved": "7500 g CO2 per participant",
+      "description": "7500 g CO2 per participant",
       "points": 7500,
-      "timeCompleted": 0,
+      "timesCompleted": 0,
       "goal": 1500000
     },
     {
-      "task": "Community Switch to 100 Energy-Efficient Bulbs",
+      "name": "Community Switch to 100 Energy-Efficient Bulbs",
       "userContribution": "Switch to 1 Energy-Efficient Bulb",
-      "carbonEmissionSaved": "500 g CO2 per participant per month",
+      "description": "500 g CO2 per participant per month",
       "points": 500,
-      "timeCompleted": 0,
+      "timesCompleted": 0,
       "goal": 50000
     },
     {
-      "task": "Community Compost 1000 kg of Organic Waste",
+      "name": "Community Compost 1000 kg of Organic Waste",
       "userContribution": "Compost 10 kg of Organic Waste",
-      "carbonEmissionSaved": "1000 g CO2 per participant",
+      "description": "1000 g CO2 per participant",
       "points": 1000,
-      "timeCompleted": 0,
+      "timesCompleted": 0,
       "goal": 100000
     },
     {
-      "task": "Community Bike 1000 km",
+      "name": "Community Bike 1000 km",
       "userContribution": "Bike 10 km",
-      "carbonEmissionSaved": "4300 g CO2 per participant",
+      "description": "4300 g CO2 per participant",
       "points": 4300,
-      "timeCompleted": 0,
+      "timesCompleted": 0,
       "goal": 430000
     }
 ]
