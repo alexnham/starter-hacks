@@ -8,6 +8,10 @@ dotenv.config()
 
 var cron = require('node-cron');
 
+// which community task is the active one?
+// why do we have addTask if we have a task bank in the backend
+const {addCommunityTask, getCommunityTask} = require('./controllers/communityTaskController')
+
 
 // daily update 
 cron.schedule('0 0 * * *', () => {
@@ -45,9 +49,12 @@ app.get('/getUserTasks', async (req, res) => {
     }
 });
 
-app.get('/getCommunityTask', async (req, res) => {
+app.get('/tasks/getCommunityTask', async (req, res) => {
     try {
-        res.send("community task")
+
+        addCommunityTask("test", 10, 10, 10)
+        
+        res.send("test")
 
     } catch (e) {
         console.log(e);
