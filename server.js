@@ -15,7 +15,7 @@ const { addDailyTask } = require('./controllers/dailyTaskController');
 app.use(express.json());
 
 // daily update 
-cron.schedule('0 0 * * *', () => {
+cron.schedule('* * * * *', () => {
     // TODO: update daily community task
 });
 
