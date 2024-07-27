@@ -9,7 +9,7 @@ const signup = async (req, res) => {
     
     const oldUser = await User.findOne({email:email})
     if(oldUser) {
-        res.send({status: "error", data: "user already exists"})
+        res.status(404).send("user exists")
     }
     const salt = await bcrypt.genSalt(10)
     const encryptedPassword = await bcrypt.hash(password, salt)
@@ -22,10 +22,9 @@ const signup = async (req, res) => {
             tasks: [],
             streak: 0
         })
-        res.send(200).send(username);
+        res.status(200).send(username);
     } catch(error) {
-        console.log(error)
-        res.status(404).send("hi")
+        res.status(404).send(error)
     }
 }
 
@@ -33,8 +32,7 @@ const login = async (req,res) => {
     try {
         const {email, password} = req.body
 
-        const user = await this.findOne({email})
-
+        const user = await User.findOne({email})
         if(!user) {
             res.status(404).send("no user found")
         }
@@ -42,7 +40,7 @@ const login = async (req,res) => {
         if(!match) {
             res.status(404).send("incorrect password")
         }
-        return user
+        res.status(200).send(user)
     } catch(e) {
         res.status(404).send(e)
     }
