@@ -7,14 +7,19 @@ const communityTaskSchema = new Schema({
         type: String,
         required: true
     },
+    userContribution:{
+        type: String,
+        required: true
+    },
+    description: {
+        type: String,
+        required:true
+    },
     points: {
         type: Number,
         required: true
     },
-    value: {
-        type: Number,
-        required: true
-    },
+    
     timesCompleted: {
         type: Number,
         required: true

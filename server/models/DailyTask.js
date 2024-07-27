@@ -7,6 +7,10 @@ const dailyTaskSchema = new Schema({
         type: String,
         required: true
     },
+    description: {
+        type: String,
+        required: true
+    },
     points: {
         type: Number,
         required: true
