@@ -1,0 +1,82 @@
+[
+    {
+      "task": "Community Walk 100 km",
+      "userContribution": "Walk 2 km",
+      "carbonEmissionSaved": "860 g CO2 per participant",
+      "value": 860,
+      "timeCompleted": 0,
+      "number": 1
+    },
+    {
+      "task": "Community Clean-Up 1000 kg of Waste",
+      "userContribution": "Clean-Up 10 kg of Waste",
+      "carbonEmissionSaved": "8000 g CO2 per participant",
+      "value": 8000,
+      "timeCompleted": 0,
+      "number": 2
+    },
+    {
+      "task": "Community Plant 100 Trees",
+      "userContribution": "Plant 1 Tree",
+      "carbonEmissionSaved": "21000 g CO2 per participant per year",
+      "value": 21000,
+      "timeCompleted": 0,
+      "number": 3
+    },
+    {
+      "task": "Community Recycle 1000 kg of Waste",
+      "userContribution": "Recycle 10 kg of Waste",
+      "carbonEmissionSaved": "8000 g CO2 per participant",
+      "value": 8000,
+      "timeCompleted": 0,
+      "number": 4
+    },
+    {
+      "task": "Community Carpool 1000 km",
+      "userContribution": "Carpool 10 km",
+      "carbonEmissionSaved": "2000 g CO2 per participant",
+      "value": 2000,
+      "timeCompleted": 0,
+      "number": 5
+    },
+    {
+      "task": "Community Save 1000 kWh of Energy",
+      "userContribution": "Save 10 kWh of Energy",
+      "carbonEmissionSaved": "4700 g CO2 per participant",
+      "value": 4700,
+      "timeCompleted": 0,
+      "number": 6
+    },
+    {
+      "task": "Community Reduce Meat Consumption by 100 kg",
+      "userContribution": "Reduce Meat Consumption by 500 g",
+      "carbonEmissionSaved": "7500 g CO2 per participant",
+      "value": 7500,
+      "timeCompleted": 0,
+      "number": 7
+    },
+    {
+      "task": "Community Switch to 100 Energy-Efficient Bulbs",
+      "userContribution": "Switch to 1 Energy-Efficient Bulb",
+      "carbonEmissionSaved": "500 g CO2 per participant per month",
+      "value": 500,
+      "timeCompleted": 0,
+      "number": 8
+    },
+    {
+      "task": "Community Compost 1000 kg of Organic Waste",
+      "userContribution": "Compost 10 kg of Organic Waste",
+      "carbonEmissionSaved": "1000 g CO2 per participant",
+      "value": 1000,
+      "timeCompleted": 0,
+      "number": 9
+    },
+    {
+      "task": "Community Bike 1000 km",
+      "userContribution": "Bike 10 km",
+      "carbonEmissionSaved": "4300 g CO2 per participant",
+      "value": 4300,
+      "timeCompleted": 0,
+      "number": 10
+    }
+]
