@@ -64,11 +64,11 @@
       "description": "100 g CO2 per kg of waste",
       "points": 100
     },
-    {
-      "name": "Install Energy-Efficient Light Bulbs",
-      "description": "500 g CO2 per bulb",
-      "points": 500
-    },
+      {
+        "name": "Install Energy-Efficient Light Bulbs",
+        "description": "500 g CO2 per bulb",
+        "points": 500
+      },
     {
       "name": "Carpool with Friends or Colleagues",
       "description": "2000 g CO2 per 10 miles",
