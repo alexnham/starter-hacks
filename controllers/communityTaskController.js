@@ -3,7 +3,7 @@ const CommunityTaskID = require('../models/CommunityTaskID')
 
 const addCommunityTask = async (req, res) => {
     console.log(req.body)
-    const {name, points, value, goal} = req.body
+    const {name, userContribution, description, points, goal} = req.body
 
     try {
         const newCommunityTask = await CommunityTask.create({name, userContribution, description, points, timesCompleted:0, goal})

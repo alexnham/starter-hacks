@@ -1,7 +1,7 @@
 const DailyTask = require('../models/DailyTask')
 
 const addDailyTask = async (req, res) => {
-    const {name, points} = req.body
+    const {name, description, points} = req.body
 
     try {
         const newDailyTask = await CommunityTask.create({name, description, points})
