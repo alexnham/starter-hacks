@@ -1,96 +1,96 @@
 [
     {
-      "task": "Bike to Work/School Instead of Driving",
+      "name": "Bike to Work/School Instead of Driving",
       "description": "2150 g CO2 per 5 km",
       "points": 2150
     },
     {
-      "task": "Take Public Transportation Instead of Driving",
+      "name": "Take Public Transportation Instead of Driving",
       "description": "1100 g CO2 per 5 km",
       "points": 1100
     },
     {
-      "task": "Plant a Tree",
+      "name": "Plant a Tree",
       "description": "21000 g CO2 per year",
       "points": 21000
     },
     {
-      "task": "Reduce Shower Time by 5 Minutes",
+      "name": "Reduce Shower Time by 5 Minutes",
       "description": "300 g CO2 per shower",
       "points": 300
     },
     {
-      "task": "Unplug Electronics When Not in Use",
+      "name": "Unplug Electronics When Not in Use",
       "description": "500 g CO2 per day",
       "points": 500
     },
     {
-      "task": "Use a Reusable Water Bottle",
+      "name": "Use a Reusable Water Bottle",
       "description": "80 g CO2 per bottle not used",
       "points": 80
     },
     {
-      "task": "Recycle Paper, Plastic, and Glass",
+      "name": "Recycle Paper, Plastic, and Glass",
       "description": "800 g CO2 per kg of waste",
       "points": 800
     },
     {
-      "task": "Use a Cloth Bag Instead of Plastic",
+      "name": "Use a Cloth Bag Instead of Plastic",
       "description": "100 g CO2 per bag",
       "points": 100
     },
     {
-      "task": "Turn Off Lights When Leaving a Room",
+      "name": "Turn Off Lights When Leaving a Room",
       "description": "150 g CO2 per hour",
       "points": 150
     },
     {
-      "task": "Eat a Plant-Based Meal",
+      "name": "Eat a Plant-Based Meal",
       "description": "2500 g CO2 per meal",
       "points": 2500
     },
     {
-      "task": "Use a Clothesline Instead of a Dryer",
+      "name": "Use a Clothesline Instead of a Dryer",
       "description": "2700 g CO2 per load",
       "points": 2700
     },
     {
-      "task": "Reduce Meat Consumption for a Week",
+      "name": "Reduce Meat Consumption for a Week",
       "description": "15000 g CO2 per week",
       "points": 15000
     },
     {
-      "task": "Compost Organic Waste",
+      "name": "Compost Organic Waste",
       "description": "100 g CO2 per kg of waste",
       "points": 100
     },
+      {
+        "name": "Install Energy-Efficient Light Bulbs",
+        "description": "500 g CO2 per bulb",
+        "points": 500
+      },
     {
-      "task": "Install Energy-Efficient Light Bulbs",
-      "description": "500 g CO2 per bulb",
-      "points": 500
-    },
-    {
-      "task": "Carpool with Friends or Colleagues",
+      "name": "Carpool with Friends or Colleagues",
       "description": "2000 g CO2 per 10 miles",
       "points": 2000
     },
     {
-      "task": "Use a Programmable Thermostat",
+      "name": "Use a Programmable Thermostat",
       "description": "8000 g CO2 per month",
       "points": 8000
     },
     {
-      "task": "Buy Local Produce",
+      "name": "Buy Local Produce",
       "description": "200 g CO2 per meal",
       "points": 200
     },
     {
-      "task": "Switch to a Renewable Energy Provider",
+      "name": "Switch to a Renewable Energy Provider",
       "description": "Variable, up to 500000 g CO2 per year",
       "points": 500000
     },
     {
-      "task": "Donate or Recycle Old Clothes",
+      "name": "Donate or Recycle Old Clothes",
       "description": "3600 g CO2 per kg of clothes",
       "points": 3600
     }
