@@ -1,4 +1,5 @@
 const User = require('../models/User')
+const bcrypt = require('bcrypt')
 
 
 const signup = async (req, res) => {
@@ -23,7 +24,8 @@ const signup = async (req, res) => {
         })
         res.send(200).send(username);
     } catch(error) {
-        res.status(404).send(e)
+        console.log(error)
+        res.status(404).send("hi")
     }
 }
 
