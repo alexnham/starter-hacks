@@ -5,11 +5,11 @@ const dailyTaskSchema = new Schema({
     //id, name, points/score
     name: {
         type: String,
-        required
+        required: true
     },
     points: {
         type: Number,
-        required
+        required: true
     }
 
 })

@@ -5,23 +5,23 @@ const communityTaskSchema = new Schema({
     //id, name, points/score, value, timesCompleted, goal
     name: {
         type: String,
-        required
+        required: true
     },
     points: {
         type: Number,
-        required
+        required: true
     },
     value: {
         type: Number,
-        required
+        required: true
     },
     timesCompleted: {
         type: Number,
-        required
+        required: true
     },
     goal: {
         type: Number,
-        required
+        required: true
     }
 })
 
