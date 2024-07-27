@@ -2,6 +2,7 @@ const CommunityTask = require('../models/CommunityTask')
 const CommunityTaskID = require('../models/CommunityTaskID')
 
 const addCommunityTask = async (req, res) => {
+    console.log(req.body)
     const {name, points, value, goal} = req.body
 
     try {
@@ -23,4 +24,4 @@ const getCommunityTask = async (req, res) => {
     }
 }
 
-module.exports(addCommunityTask, getCommunityTask)
+module.exports = {addCommunityTask, getCommunityTask}

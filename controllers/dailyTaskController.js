@@ -13,4 +13,4 @@ const addDailyTask = async (req, res) => {
 
 
 
-module.exports(addDailyTask)
+module.exports = {addDailyTask}
