@@ -12,4 +12,15 @@ const addCommunityTask = async (req, res) => {
     }
 }
 
-module.exports(addCommunityTask)
+const getCommunityTask = async (req, res) => {
+    const {name} = req.body
+
+    try {
+        const communityTask = await CommunityTask.findOne({name})
+        res.status(200).json(communityTask)
+    } catch(e) {
+        res.status(404).json("Error", e)
+    }
+}
+
+module.exports(addCommunityTask, getCommunityTask)
