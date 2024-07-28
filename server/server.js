@@ -15,7 +15,7 @@ app.use(express.json());
 
 // Import controllers
 const { addCommunityTask, getCommunityTask, getAllCommunityTasks, updateCommunityTaskID } = require('./controllers/communityTaskController');
-const { addDailyTask, resetDailyTask } = require('./controllers/dailyTaskController');
+const { addDailyTask, resetDailyTask, getDailyTask } = require('./controllers/dailyTaskController');
 const { signup, login } = require('./controllers/userController');
 
 // Cron job to update CommunityTaskID every minute
@@ -58,6 +58,7 @@ app.post('/tasks/addDailyTask', addDailyTask);
 app.post('/tasks/resetDailyTasks', resetDailyTask)
 app.post('/user/signup', signup);
 app.post('/user/login', login);
+app.get('/tasks/getDailyTask',getDailyTask)
 
 
 // Connect to MongoDB and start server

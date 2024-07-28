@@ -5,9 +5,24 @@ const addDailyTask = async (req, res) => {
     const {name, description, points} = req.body
     try {
         const newDailyTask = await DailyTask.create({name, description, points})
-        res.status(200).json(newDailyTask)
+        res.status(200).send(newDailyTask)
     } catch(e) {
-        res.status(404).json("Error", e)
+        res.status(404).send("Error", e)
+    }
+}
+
+const getDailyTask = async (req,res) => {
+    const {id} = req.body
+    try {
+        const output = await DailyTask.findById(id)
+        if(!output) {
+            res.status(404).json("No daily task")
+
+        }
+        res.status(200).send(output)
+    } catch(e) {
+        res.status(404).json("Error: ", e)
+
     }
 }
 
@@ -34,4 +49,4 @@ const resetDailyTask = async (req, res) => {
 }
 
 
-module.exports = {addDailyTask, resetDailyTask}
+module.exports = {addDailyTask, resetDailyTask, getDailyTask}
