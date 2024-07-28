@@ -59,8 +59,8 @@ export default function Index() {
     <View style={tw`flex flex-col justify-between h-full bg-slate-100`}> 
       <View>
       {/* Header of page displaying username and welcome text */}
-      <View style={tw`flex justify-center px-8 py-4 h-32 rounded-3xl bg-green-600 gap-1`}>
-        <Text style={tw`text-white font-bold text-3xl`}>Environment App</Text>
+      <View style={tw`flex justify-center px-8 py-4 h-32 rounded-b-3xl bg-green-600 gap-1`}>
+        <Text style={tw`text-white font-bold text-5xl`}>Ecology</Text>
       </View>
       {/* Safe area view to hold form */}
       <SafeAreaView style={tw`flex mx-8 my-8 gap-8`}>

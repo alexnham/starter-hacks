@@ -216,7 +216,7 @@ export default function Index() {
                       {taskItem.name}
                     </Text>
                     <Text style={tw`${user.tasks[index].status === "Incomplete" ? "text-green-800" : "text-white"} text-xs`} numberOfLines={1} ellipsizeMode="tail">
-                      {taskItem.description} ♻️ {user.tasks[index].status === "Complete" && "Saved 🔥"}
+                      {taskItem.description} ♻️ {user.tasks[index].status === "Complete"} Saved 🔥
                     </Text>
                   </View>
                   {user.tasks[index].status === "Incomplete" && <View style={tw`bg-green-800 rounded-full h-6 w-6`} />}
