@@ -13,9 +13,8 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-// Import controllers
 const { addCommunityTask, getCommunityTask, getAllCommunityTasks, updateCommunityTaskID, completeUserCommunityTask} = require('./controllers/communityTaskController');
-const { addDailyTask, resetDailyTask, completeUserDailyTask, getUserDailyTasks } = require('./controllers/dailyTaskController');
+const { addDailyTask, resetDailyTask, completeUserDailyTask, getUserDailyTasks, createUserDailyTasks } = require('./controllers/dailyTaskController');
 const { signup, login, getTopUsers, updateUserStats, getUser} = require('./controllers/userController');
 
 // Cron job to update CommunityTaskID every minute
@@ -26,14 +25,7 @@ cron.schedule('* * * * *', () => {
 });
 
 // Routes
-app.get('/leaderboard', async (req, res) => {
-    try {
-        res.send("leaderboard");
-    } catch (e) {
-        console.error(e);
-        res.sendStatus(500);
-    }
-});
+app.get('/leaderboard', getTopUsers);
 
 app.get('/user/get', async (req, res) => {
     try {
@@ -44,15 +36,7 @@ app.get('/user/get', async (req, res) => {
     }
 });
 
-app.get('/getUserTasks', async (req, res) => {
-    try {
-        res.send("user tasks");
-    } catch (e) {
-        console.error(e);
-        res.sendStatus(500);
-    }
-});
-
+app.post('/user/createUserDailyTasks', createUserDailyTasks);
 app.post('/tasks/completeUserDailyTask', completeUserDailyTask);
 app.post('/tasks/completeUserCommunityTask', completeUserCommunityTask);
 

@@ -2,104 +2,138 @@ const DailyTask = require('../models/DailyTask')
 const User = require('../models/User')
 
 const addDailyTask = async (req, res) => {
-    const {name, description, points} = req.body
+    const { name, description, points } = req.body
     try {
-        const newDailyTask = await DailyTask.create({name, description, points})
+        const newDailyTask = await DailyTask.create({ name, description, points })
         res.status(200).send(newDailyTask)
-    } catch(e) {
+    } catch (e) {
         res.status(404).send("Error", e)
     }
 }
 
 const getUserDailyTasks = async (req, res) => {
-    const {username} = req.body
+    const { username } = req.body
     try {
-        const output = await User.findOne({username})
-        if(!output) {
+        const output = await User.findOne({ username })
+        if (!output) {
             res.status(404).json("No user")
         }
         let tasks = []
         for (let i = 0; i < output.tasks.length; i++) {
             tasks.push(await getDailyTask(output.tasks[i].task))
         }
-       
+
         res.status(200).json(tasks)
-    } catch(e) {
+    } catch (e) {
         res.status(404).json("Error: ", e)
     }
 }
-const completeUserDailyTask = async (req, res) => {
-    const { username, id } = req.body;
+const createUserDailyTasks = async (req, res) => {
+    const { username } = req.body;
     try {
-        const output = await User.findOne({ username });
-        if (!output) {
+        const user = await User.findOne({ username });
+        if (!user) {
             return res.status(404).json("No user");
         }
 
-        let taskFound = false;
-        for (let i = 0; i < output.tasks.length; i++) {
-            if (output.tasks[i].task.toString() === id.toString()) {
-                output.tasks[i].status = "Complete";
-                const task = await DailyTask.findById(id);
-                if (task) {
-                    output.points += task.points;
-                } else {
-                    return res.status(404).json("Task not found");
-                }
-                taskFound = true;
-                break;  // Assuming only one task needs to be updated
-            }
+        let tasks = [];
+        for (let i = 0; i < user.tasks.length; i++) {
+            tasks.push(await getDailyTask(user.tasks[i].task));
         }
 
-        if (!taskFound) {
-            return res.status(404).json("Task not found in user's tasks");
-        }
-
-        await output.save();
-        console.log("success");
-        console.log(output)
-        return res.status(200).json(output);
-    } catch (e) {
-        console.log(e);
-        return res.status(500).json(e);
-    }
-};
-
-
-const getDailyTask = async (id) => {
-    try {
-        const output = await DailyTask.findById(id)
-        if(!output) {
-            return null
-        }
-        return output
-    } catch(e) {
-        return e
-    }
-}
-
-
-const resetDailyTask = async (req, res) => {
-    try {
-        const users = await User.find({});
         const dailyTasks = await DailyTask.find({});
+        if (dailyTasks.length < 3) {
+            return res.status(400).json("Not enough daily tasks available");
+        }
 
-        for (const user of users) {
-            user.tasks = [];
-            user.communityTask = 0
-            for (let i = 0; i < 3; i++) {
-                const randomNum = Math.floor(Math.random() * (dailyTasks.length - 2)) + 2;
+        const usedIndices = new Set();
+        while (usedIndices.size < 3) {
+            const randomNum = Math.floor(Math.random() * dailyTasks.length);
+            if (!usedIndices.has(randomNum)) {
+                usedIndices.add(randomNum);
                 user.tasks.push({ task: dailyTasks[randomNum], status: "Incomplete" });
             }
-            await user.save();  // Save the updated user document
         }
-        console.log("tasks reset");
-        //res.status(200).send("tasks reset");
+        
+        await user.save();
+        console.log("HI")
+        res.status(200).json(tasks);
     } catch (e) {
-        console.log(e);
-        //res.status(404).send(e);
+        res.status(500).json({ error: e.message });
     }
-}
+};
+const completeUserDailyTask = async (req, res) => {
+        const { username, id } = req.body;
+        try {
+            const output = await User.findOne({ username });
+            if (!output) {
+                return res.status(404).json("No user");
+            }
+
+            let taskFound = false;
+            for (let i = 0; i < output.tasks.length; i++) {
+                if (output.tasks[i].task.toString() === id.toString()) {
+                    output.tasks[i].status = "Complete";
+                    const task = await DailyTask.findById(id);
+                    if (task) {
+                        output.points += task.points;
+                    } else {
+                        return res.status(404).json("Task not found");
+                    }
+                    taskFound = true;
+                    break;  // Assuming only one task needs to be updated
+                }
+            }
+
+            if (!taskFound) {
+                return res.status(404).json("Task not found in user's tasks");
+            }
+
+            await output.save();
+            console.log("success");
+            console.log(output)
+            return res.status(200).json(output);
+        } catch (e) {
+            console.log(e);
+            return res.status(500).json(e);
+        }
+    };
 
 
-module.exports = {addDailyTask, resetDailyTask, getDailyTask, getUserDailyTasks, completeUserDailyTask}
+    const getDailyTask = async (id) => {
+        try {
+            const output = await DailyTask.findById(id)
+            if (!output) {
+                return null
+            }
+            return output
+        } catch (e) {
+            return e
+        }
+    }
+
+
+    const resetDailyTask = async (req, res) => {
+        try {
+            const users = await User.find({});
+            const dailyTasks = await DailyTask.find({});
+
+            for (const user of users) {
+                user.tasks = [];
+                user.communityTask = 0
+                for (let i = 0; i < 3; i++) {
+                    const randomNum = Math.floor(Math.random() * (dailyTasks.length - 2)) + 2;
+                    user.tasks.push({ task: dailyTasks[randomNum], status: "Incomplete" });
+                }
+                await user.save();  // Save the updated user document
+            }
+            console.log("tasks reset");
+            //res.status(200).send("tasks reset");
+        } catch (e) {
+            console.log(e);
+            //res.status(404).send(e);
+        }
+    }
+
+
+    module.exports = { addDailyTask, resetDailyTask, getDailyTask, getUserDailyTasks, completeUserDailyTask, createUserDailyTasks }

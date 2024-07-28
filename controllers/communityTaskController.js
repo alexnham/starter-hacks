@@ -81,10 +81,10 @@ const completeUserCommunityTask = async (req, res) => {
 const updateCommunityTaskID = async () => {
     try {
         // Generate a random number between 0 and 9
-        const randomID = Math.floor(Math.random() * 10)
+        const randomID = Math.floor(Math.random() * 9)
         const id = await CommunityTaskID.find({})
         const communityTasks = await CommunityTask.find({});
-        communityTasks[id[0].index].timesCompleted = 0
+        communityTasks[id[0].index%communityTasks.length].timesCompleted = 0
         await communityTasks[id[0].index].save()
 
         // Update the CommunityTaskID document, create if it doesn't exist
