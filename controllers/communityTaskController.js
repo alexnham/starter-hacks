@@ -3,7 +3,6 @@ const CommunityTaskID = require('../models/CommunityTaskID'); // Correctly impor
 const User = require('../models/User');
 
 const addCommunityTask = async (req, res) => {
-    console.log(req.body);
     const { name, userContribution, description, points, goal } = req.body;
 
     try {
@@ -46,18 +45,25 @@ const completeUserCommunityTask = async (req, res) => {
     const {username} = req.body
     try {
         const output = await User.findOne({username})
+        const id = await CommunityTaskID.find({})
         const communityTasks = await CommunityTask.find({});
-        const json = JSON.parse(JSON.stringify(communityTasks, null, 2));
+        if (!communityTasks) {
+            return res.status(404).json({ error: 'Community task not found' });
+        }        
         if(!output) {
             res.status(404).json("No user")
         }
+        console.log(communityTasks[id[0].index])
         output.communityTask = 1
-        output.points += json[0].points
+        output.points += communityTasks[id[0].index].points
         output.streak += 1
+        communityTasks[id[0].index].timesCompleted += 1
+        await communityTasks[id[0].index].save()
         await output.save()
-        res.status(200).send(output)
+        res.status(200).json({output: output})
     } catch(e) {
-        res.status(404).json("Error: ", e)
+        console.log(e)
+        res.status(404).json({error: e})
     }
 }
 
@@ -77,7 +83,6 @@ const updateCommunityTaskID = async () => {
                 const users = await User.find({});
         
                 for (const user of users) {
-                    console.log(user)
                     if(user.communityTask === 0) {
                         user.streak === 0
                     } else {
