@@ -16,7 +16,7 @@ app.use(express.json());
 // Import controllers
 const { addCommunityTask, getCommunityTask, getAllCommunityTasks, updateCommunityTaskID } = require('./controllers/communityTaskController');
 const { addDailyTask } = require('./controllers/dailyTaskController');
-const { signup, login, getTopUsers } = require('./controllers/userController');
+const { signup, login, getTopUsers, updateUserStats } = require('./controllers/userController');
 
 // Cron job to update CommunityTaskID every minute
 cron.schedule('* * * * *', () => {
@@ -57,7 +57,8 @@ app.post('/tasks/addCommunityTask', addCommunityTask);
 app.post('/tasks/addDailyTask', addDailyTask);
 app.post('/user/signup', signup);
 app.post('/user/login', login);
-app.get('/user/top', getTopUsers); // New route for getting top 10 users
+app.get('/user/top', getTopUsers);
+app.post('/user/updateStats', updateUserStats); // New route for updating user stats
 
 // Connect to MongoDB and start server
 mongoose.connect(process.env.MONG_URI, { useNewUrlParser: true, useUnifiedTopology: true })
