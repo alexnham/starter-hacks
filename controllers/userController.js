@@ -46,7 +46,6 @@ const login = async (req, res) => {
     }
 };
 
-// New function to get top 10 users
 const getTopUsers = async (req, res) => {
     try {
         const topUsers = await User.find().sort({ points: -1 }).limit(10);
@@ -57,4 +56,26 @@ const getTopUsers = async (req, res) => {
     }
 };
 
-module.exports = { signup, login, getTopUsers };
+// New function to update user's streak and points
+const updateUserStats = async (req, res) => {
+    try {
+        const { email, streak, points } = req.body;
+
+        const user = await User.findOneAndUpdate(
+            { email },
+            { streak, points },
+            { new: true }
+        );
+
+        if (!user) {
+            return res.status(404).send("No user found");
+        }
+
+        res.status(200).json(user);
+    } catch (error) {
+        console.error('Error updating user stats:', error);
+        res.status(500).json({ error: 'An error occurred while updating user stats' });
+    }
+};
+
+module.exports = { signup, login, getTopUsers, updateUserStats };
