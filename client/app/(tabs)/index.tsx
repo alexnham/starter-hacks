@@ -7,25 +7,11 @@ export default function Index() {
   return (
     <View style={tw`flex h-full`}> 
       {/* Header of page displaying username and welcome text */}
-      <View style={tw`px-8 pt-12 pb-4 rounded-3xl bg-green-600 gap-1`}>
-        <Text style={tw`text-white font-bold text-3xl`}>Hey Lucas,</Text>
-        <Text style={tw`text-white text-lg`}>Good Morning.</Text>
+      <View style={tw`flex justify-center px-8 py-4 h-32 rounded-3xl bg-green-600 gap-1`}>
+        <Text style={tw`text-white font-bold text-3xl`}>Environment App</Text>
       </View>
-      {/* Safe area view to hold remainder of dashboard components */}
+      {/* Safe area view to hold form */}
       <SafeAreaView style={tw`flex mx-8 my-8 gap-8`}>
-        {/* View to hold community task section */}
-        <View>
-          <Text style={tw`font-bold text-xl`}>Community Task</Text>
-
-        </View>
-
-        {/* View to hold the daily tasks */}
-        <View style={tw`flex gap-4`}>
-          <Text style={tw`font-bold text-xl`}>Todays Environment Tasks 🌱</Text>
-          <View>
-            {/* Map the tasks from dailyTasks state */}
-          </View>
-        </View>
         
       </SafeAreaView>
     </View>
