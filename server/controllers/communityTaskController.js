@@ -81,32 +81,38 @@ const completeUserCommunityTask = async (req, res) => {
 const updateCommunityTaskID = async () => {
     try {
         // Generate a random number between 0 and 9
-        const randomID = Math.floor(Math.random() * 9)
-        const id = await CommunityTaskID.find({})
+        const randomID = Math.floor(Math.random() * 9);
+        const communityTaskIDs = await CommunityTaskID.find({});
         const communityTasks = await CommunityTask.find({});
-        communityTasks[id[0].index%communityTasks.length].timesCompleted = 0
-        await communityTasks[id[0].index].save()
+
+        if (communityTaskIDs.length > 0) {
+            const currentIndex = communityTaskIDs[0].index % communityTasks.length;
+            communityTasks[currentIndex].timesCompleted = 0;
+            await communityTasks[currentIndex].save();
+        }
 
         // Update the CommunityTaskID document, create if it doesn't exist
         const updatedTaskID = await CommunityTaskID.findOneAndUpdate(
             {},
-            { index: randomID }, // Assuming the field to update is named 'id'
+            { index: randomID },
             { new: true, upsert: true } // Create the document if it doesn't exist
         );
+
         const users = await User.find({});
-        console.log(randomID)
         for (const user of users) {
             if (user.communityTask === 0) {
-                user.streak === 0
+                user.streak = 0; // Corrected from '===' to '='
             } else {
-                user.communityTask = 0
+                user.communityTask = 0;
             }
             await user.save();
         }
+
         console.log('CommunityTaskID updated:', updatedTaskID);
     } catch (error) {
         console.error('Error updating CommunityTaskID:', error);
     }
 };
+
 
 module.exports = { addCommunityTask, getCommunityTask, getAllCommunityTasks, updateCommunityTaskID, completeUserCommunityTask };
