@@ -23,6 +23,8 @@ const signup = async (req, res) => {
             points: 0,
             communityTask: 0
         })
+        console.log("POSTED")
+
         res.status(200).send(user);
     } catch (error) {
         res.status(404).send(error);
@@ -41,15 +43,32 @@ const login = async (req, res) => {
         if (!match) {
             return res.status(404).send("Incorrect password");
         }
+        console.log("POSTED")
+
         res.status(200).send(user);
     } catch (e) {
         res.status(404).send(e);
     }
 };
+const getUser = async (req, res) => {
+    try {
+        const {username} = req.body
+        const user = await User.findOne({ username });
+        if (!user) {
+            return res.status(404).send("No user found");
+        }
+        console.log("POSTED")
 
+        res.status(200).send(user);
+    } catch (e) {
+        res.status(404).send(e);
+    }
+}
 const getTopUsers = async (req, res) => {
     try {
         const topUsers = await User.find().sort({ points: -1 }).limit(10);
+        console.log("POSTED")
+
         res.status(200).json(topUsers);
     } catch (error) {
         console.error('Error fetching top users:', error);
@@ -71,7 +90,7 @@ const updateUserStats = async (req, res) => {
         if (!user) {
             return res.status(404).send("No user found");
         }
-
+        console.log("POSTED")
         res.status(200).json(user);
     } catch (error) {
         console.error('Error updating user stats:', error);
@@ -79,4 +98,4 @@ const updateUserStats = async (req, res) => {
     }
 };
 
-module.exports = { signup, login, getTopUsers, updateUserStats };
+module.exports = { signup, login, getTopUsers, updateUserStats, getUser};

@@ -7,6 +7,8 @@ const addCommunityTask = async (req, res) => {
 
     try {
         const newCommunityTask = await CommunityTask.create({ name, userContribution, description, points, timesCompleted: 0, goal });
+        console.log("POSTED")
+
         res.status(201).json(newCommunityTask);
     } catch (error) {
         console.error(error);
@@ -22,6 +24,10 @@ const getCommunityTask = async (req, res) => {
         if (!communityTasks) {
             return res.status(404).json({ error: 'Community task not found' });
         }
+        console.log("POSTED")
+        console.log(id[0].index)
+        console.log(json.length)
+        console.log(json[id[0].index])
         res.status(200).json(json[id[0].index]);
     } catch (error) {
         console.error(error);
@@ -34,6 +40,8 @@ const getAllCommunityTasks = async (req, res) => {
     try {
         const communityTasks = await CommunityTask({});
         const json = JSON.parse(JSON.stringify(communityTasks, null, 2));
+        console.log("POSTED")
+
         res.status(200).json(communityTasks);
     } catch (error) {
         console.error(error);
@@ -42,15 +50,15 @@ const getAllCommunityTasks = async (req, res) => {
 };
 
 const completeUserCommunityTask = async (req, res) => {
-    const {username} = req.body
+    const { username } = req.body
     try {
-        const output = await User.findOne({username})
+        const output = await User.findOne({ username })
         const id = await CommunityTaskID.find({})
         const communityTasks = await CommunityTask.find({});
         if (!communityTasks) {
             return res.status(404).json({ error: 'Community task not found' });
-        }        
-        if(!output) {
+        }
+        if (!output) {
             res.status(404).json("No user")
         }
         console.log(communityTasks[id[0].index])
@@ -60,10 +68,11 @@ const completeUserCommunityTask = async (req, res) => {
         communityTasks[id[0].index].timesCompleted += 1
         await communityTasks[id[0].index].save()
         await output.save()
-        res.status(200).json({output: output})
-    } catch(e) {
+        console.log("POSTED")
+        res.status(200).json({ output: output })
+    } catch (e) {
         console.log(e)
-        res.status(404).json({error: e})
+        res.status(404).json({ error: e })
     }
 }
 
@@ -71,8 +80,12 @@ const completeUserCommunityTask = async (req, res) => {
 
 const updateCommunityTaskID = async () => {
     try {
-        // Generate a random number between 1 and 10
-        const randomID = Math.floor(Math.random() * 10) + 1;
+        // Generate a random number between 0 and 9
+        const randomID = Math.floor(Math.random() * 10)
+        const id = await CommunityTaskID.find({})
+        const communityTasks = await CommunityTask.find({});
+        communityTasks[id[0].index].timesCompleted = 0
+        await communityTasks[id[0].index].save()
 
         // Update the CommunityTaskID document, create if it doesn't exist
         const updatedTaskID = await CommunityTaskID.findOneAndUpdate(
@@ -80,20 +93,20 @@ const updateCommunityTaskID = async () => {
             { index: randomID }, // Assuming the field to update is named 'id'
             { new: true, upsert: true } // Create the document if it doesn't exist
         );
-                const users = await User.find({});
-        
-                for (const user of users) {
-                    if(user.communityTask === 0) {
-                        user.streak === 0
-                    } else {
-                        user.communityTask = 0
-                    }
-                    await user.save();
-                }
+        const users = await User.find({});
+        console.log(randomID)
+        for (const user of users) {
+            if (user.communityTask === 0) {
+                user.streak === 0
+            } else {
+                user.communityTask = 0
+            }
+            await user.save();
+        }
         console.log('CommunityTaskID updated:', updatedTaskID);
     } catch (error) {
         console.error('Error updating CommunityTaskID:', error);
     }
 };
 
-module.exports = { addCommunityTask, getCommunityTask, getAllCommunityTasks, updateCommunityTaskID, completeUserCommunityTask};
+module.exports = { addCommunityTask, getCommunityTask, getAllCommunityTasks, updateCommunityTaskID, completeUserCommunityTask };
