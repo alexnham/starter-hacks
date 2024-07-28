@@ -59,6 +59,7 @@ const getDailyTask = async (id) => {
     }
 }
 
+
 const resetDailyTask = async (req, res) => {
     try {
         const users = await User.find({});
@@ -67,6 +68,7 @@ const resetDailyTask = async (req, res) => {
         for (const user of users) {
             console.log(user)
             user.tasks = [];
+            user.communityTask = 0
             for (let i = 0; i < 3; i++) {
                 const randomNum = Math.floor(Math.random() * (dailyTasks.length - 2)) + 2;
                 user.tasks.push({ task: dailyTasks[randomNum], status: "Incomplete" });
