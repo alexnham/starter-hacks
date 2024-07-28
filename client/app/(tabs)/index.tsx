@@ -1,12 +1,9 @@
-import React from "react";
 import { Text, View, SafeAreaView } from "react-native";
-import { useState } from "react";
+import { Link } from "expo-router";
 
 import tw from 'twrnc'
 
 export default function Index() {
-  const [dailyTasks, setDailyTasks] = useState(null)
-
   return (
     <View style={tw`flex h-full`}> 
       {/* Header of page displaying username and welcome text */}
