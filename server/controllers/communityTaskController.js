@@ -53,6 +53,7 @@ const completeUserCommunityTask = async (req, res) => {
         }
         output.communityTask = 1
         output.points += json[0].points
+        output.streak += 1
         await output.save()
         res.status(200).send(output)
     } catch(e) {
@@ -80,7 +81,6 @@ const updateCommunityTaskID = async () => {
                     if(user.communityTask === 0) {
                         user.streak === 0
                     } else {
-                        user.streak += 1
                         user.communityTask = 0
                     }
                     await user.save();
