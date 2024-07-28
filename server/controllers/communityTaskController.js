@@ -32,6 +32,7 @@ const getCommunityTask = async (req, res) => {
 const getAllCommunityTasks = async (req, res) => {
     try {
         const communityTasks = await CommunityTask({});
+        const json = JSON.parse(JSON.stringify(communityTasks, null, 2));
         res.status(200).json(communityTasks);
     } catch (error) {
         console.error(error);
