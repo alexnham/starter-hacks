@@ -76,11 +76,11 @@ const resetDailyTask = async (req, res) => {
             }
             await user.save();  // Save the updated user document
         }
-
-        res.status(200).send("tasks reset");
+        console.log("tasks reset");
+        //res.status(200).send("tasks reset");
     } catch (e) {
         console.log(e);
-        res.status(404).send(e);
+        //res.status(404).send(e);
     }
 }
 
