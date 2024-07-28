@@ -11,7 +11,7 @@ var cron = require('node-cron');
 // which community task is the active one?
 // why do we have addTask if we have a task bank in the backend
 const {addCommunityTask, getCommunityTask} = require('./controllers/communityTaskController');
-const { addDailyTask } = require('./controllers/dailyTaskController');
+const { addDailyTask, resetDailyTask } = require('./controllers/dailyTaskController');
 const { signup, login } = require('./controllers/userController');
 app.use(express.json());
 
@@ -55,6 +55,7 @@ app.post('/tasks/addCommunityTask', addCommunityTask);
 app.post('/tasks/addDailyTask', addDailyTask)
 app.post('/user/signup',signup)
 app.post('/user/login',login)
+app.post('/tasks/resetDailyTask', resetDailyTask)
 
 mongoose.connect(process.env.MONG_URI)
     .then(() => {
