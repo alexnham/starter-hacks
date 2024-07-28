@@ -21,7 +21,8 @@ const signup = async (req, res) => {
             email:email,
             tasks: [],
             streak: 0,
-            points: 0
+            points: 0,
+            communityTask: 0
         })
         res.status(200).send(user);
     } catch(error) {

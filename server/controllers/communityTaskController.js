@@ -15,13 +15,14 @@ const addCommunityTask = async (req, res) => {
 };
 
 const getCommunityTask = async (req, res) => {
-    const { name } = req.body;
     try {
-        const communityTask = await CommunityTask.findOne({ name });
-        if (!communityTask) {
+        const id = await CommunityTaskID.find({})
+        const communityTasks = await CommunityTask.find({});
+        const json = JSON.parse(JSON.stringify(communityTasks, null, 2));
+        if (!communityTasks) {
             return res.status(404).json({ error: 'Community task not found' });
         }
-        res.status(200).json(communityTask);
+        res.status(200).json(json[id[0].index]);
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'An error occurred while retrieving the community task', details: error.message });
