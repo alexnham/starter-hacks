@@ -1,6 +1,8 @@
 import { View, Text, TextInput, Pressable, StyleSheet, Alert } from 'react-native';
 import React, { useState } from 'react';
 import { router } from 'expo-router';
+import {saveToken} from './auth';
+
 const Signup = () => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -33,6 +35,7 @@ const Signup = () => {
             const data = await response.json();
             if (response.ok) {
                 Alert.alert('Success', 'Signup successful');
+                await saveToken(data.username);
                 router.replace('/dashboard')
                 // Handle successful signup (e.g., navigate to a different screen)
             } else {

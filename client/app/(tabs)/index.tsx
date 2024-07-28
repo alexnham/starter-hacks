@@ -1,15 +1,59 @@
-import { Text, View, SafeAreaView, TextInput } from "react-native";
+import { Text, View, SafeAreaView, StyleSheet, TextInput, Pressable, Alert} from "react-native";
 import { Link } from "expo-router";
 import Navbar from '../../components/Navbar';
+import {saveToken, getToken} from './auth';
+import { router } from 'expo-router';
+
 
 import tw from 'twrnc'
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Index() {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  useEffect(() => {
+    const fetchToken = async () => {
+      try {
+        const storedToken = await getToken();
+        if (storedToken !== null) {
+          router.replace('/dashboard')
+        } 
+      } catch (error) {
+        console.error('Failed to load token from storage', error);
+      }
+    };
+
+    fetchToken();
+  }, [])
+  const handleLogin = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/user/login', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+              email,
+              password,
+          }),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+          Alert.alert('Success', 'Login successful');
+          await saveToken(data.username);
+          router.replace('/dashboard')
+          // Handle successful signup (e.g., navigate to a different screen)
+      } else {
+          Alert.alert('Error', data.message || 'Something went wrong');
+      }
+  } catch (error) {
+      console.error('Error:', error);
+      Alert.alert('Error: ' + error);
+  }
+  }
 
   return (
     <View style={tw`flex flex-col justify-between h-full bg-slate-100`}> 
@@ -28,13 +72,18 @@ export default function Index() {
               style={tw`shadow-md bg-white w-full h-12 rounded-md text-lg px-4 py-1`}
               value={`${email}`}
               onChangeText={newText => setEmail(newText)}
+              autoCapitalize='none'
             />
             <TextInput 
               placeholder="Enter password"
               style={tw`shadow-md shadow-inner bg-white w-full h-12 rounded-md text-lg px-4 py-1`}
               value={`${password}`}
               onChangeText={newText => setPassword(newText)}
+              autoCapitalize='none'
             />
+             <Pressable style={styles.button} onPress={handleLogin}>
+                <Text style={styles.buttonText}>Login</Text>
+            </Pressable>
           </View>
           <Link style={tw`mt-12 underline`} href='/signup'>Sign Up</Link>
         </View>
@@ -47,3 +96,34 @@ export default function Index() {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+      flex: 1,
+      justifyContent: 'center',
+      padding: 16,
+      backgroundColor: '#fff',
+  },
+  title: {
+      fontSize: 24,
+      marginBottom: 16,
+      textAlign: 'center',
+  },
+  input: {
+      height: 40,
+      borderColor: 'gray',
+      borderWidth: 1,
+      marginBottom: 12,
+      paddingHorizontal: 8,
+  },
+  button: {
+      backgroundColor: '#007BFF',
+      padding: 10,
+      borderRadius: 5,
+      alignItems: 'center',
+  },
+  buttonText: {
+      color: '#fff',
+      fontSize: 16,
+  },
+});
