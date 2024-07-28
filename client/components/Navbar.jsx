@@ -5,11 +5,13 @@ import tw from 'twrnc'
 
 
 
+
 const Navbar = () => {
     return (  
-        <View style={tw`px-4 py-4 flex flex-row gap-2`}>
+        <View style={tw`m-0 w-full text-white py-8 flex flex-row bg-green-600 justify-between items-center`}>
             <View>
                 <Link href="/dashboard">Home</Link>
+            
             </View>
             <View>
                 <Link href="/profile">Profile</Link>
