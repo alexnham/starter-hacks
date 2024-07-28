@@ -39,7 +39,7 @@ const Profile = () => {
     useEffect(() => {
         const handleLogin = async () => {
             try {
-                const response = await fetch('http://localhost:3000/user/getUser', {
+                const response = await fetch('https://starter-hacks-eeef3ee82963.herokuapp.com/user/getUser', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

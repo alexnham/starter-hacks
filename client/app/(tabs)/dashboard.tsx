@@ -17,7 +17,7 @@ export default function Index() {
 
   const getCommunityTask = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/tasks/getCommunityTask");
+      const response = await axios.get("https://starter-hacks-eeef3ee82963.herokuapp.com/tasks/getCommunityTask");
       setCommunityTask(response.data);
     } catch (error) {
       console.error('Failed to fetch community task', error);
@@ -48,7 +48,7 @@ export default function Index() {
   useEffect(() => {
     const handleLogin = async () => {
       try {
-        const response = await fetch('http://localhost:3000/user/getUser', {
+        const response = await fetch('https://starter-hacks-eeef3ee82963.herokuapp.com/user/getUser', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -72,7 +72,7 @@ export default function Index() {
   useEffect(() => {
     const settingUserTask = async () => {
       try {
-        const userTaskResponse = await axios.post("http://localhost:3000/user/getUserDailyTasks", { username: user.username });
+        const userTaskResponse = await axios.post("https://starter-hacks-eeef3ee82963.herokuapp.com/user/getUserDailyTasks", { username: user.username });
         setUserTask(userTaskResponse.data);
       } catch (error) {
         console.error("Error fetching user tasks:", error);
@@ -97,8 +97,8 @@ export default function Index() {
           text: 'OK',
           onPress: async () => {
             try {
-              await axios.post('http://localhost:3000/tasks/completeUserCommunityTask', { username: user.username });
-              const userResponse = await axios.post("http://localhost:3000/user/getUser", { username: token });
+              await axios.post('https://starter-hacks-eeef3ee82963.herokuapp.com/tasks/completeUserCommunityTask', { username: user.username });
+              const userResponse = await axios.post("https://starter-hacks-eeef3ee82963.herokuapp.com/user/getUser", { username: token });
               setUser(userResponse.data);
               console.log(user)
               getCommunityTask()
@@ -127,8 +127,8 @@ export default function Index() {
           text: 'OK',
           onPress: async () => {
             try {
-              await axios.post('http://localhost:3000/tasks/completeUserDailyTask', { username: user.username, id: id });
-              const userResponse = await axios.post("http://localhost:3000/user/getUser", { username: token });
+              await axios.post('https://starter-hacks-eeef3ee82963.herokuapp.com/tasks/completeUserDailyTask', { username: user.username, id: id });
+              const userResponse = await axios.post("https://starter-hacks-eeef3ee82963.herokuapp.com/user/getUser", { username: token });
               setUser(userResponse.data);
               console.log(user)
             } catch (error) {
