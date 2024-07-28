@@ -1,5 +1,4 @@
-import { Text, View, SafeAreaView } from "react-native";
-import { Link } from "expo-router";
+import { Text, View, SafeAreaView, TextInput } from "react-native";
 
 import tw from 'twrnc'
 
@@ -12,7 +11,13 @@ export default function Index() {
       </View>
       {/* Safe area view to hold form */}
       <SafeAreaView style={tw`flex mx-8 my-8 gap-8`}>
-        
+        <View style={tw`flex items-center py-12`}>
+          <Text style={tw`font-bold text-2xl`}>Login</Text>
+          <TextInput 
+            placeholder="Enter email"
+            style={tw``}
+          />
+        </View>
       </SafeAreaView>
     </View>
   );
