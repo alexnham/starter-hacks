@@ -21,6 +21,7 @@ const { signup, login, getTopUsers, updateUserStats } = require('./controllers/u
 // Cron job to update CommunityTaskID every minute
 cron.schedule('* * * * *', () => {
     console.log('Running cron job to update CommunityTaskID');
+    resetDailyTask();
     updateCommunityTaskID();
 });
 
