@@ -43,6 +43,10 @@ const userSchema = new Schema({
     points: {
         type: Number,
         required: true
+    },
+    communityTask: {
+        type: Number,
+        required: true
     }
 
 }, {timestamps: true})

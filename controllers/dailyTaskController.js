@@ -11,18 +11,51 @@ const addDailyTask = async (req, res) => {
     }
 }
 
-const getDailyTask = async (req,res) => {
-    const {id} = req.body
+const getUserDailyTasks = async (req, res) => {
+    const {username} = req.body
     try {
-        const output = await DailyTask.findById(id)
+        const output = await User.findOne({username})
         if(!output) {
-            res.status(404).json("No daily task")
-
+            res.status(404).json("No user")
         }
+        let tasks = []
+        for (let i = 0; i < output.tasks.length; i++) {
+            tasks.push(await getDailyTask(output.tasks[i].task))
+        }
+       
+        res.status(200).send(tasks)
+    } catch(e) {
+        res.status(404).json("Error: ", e)
+    }
+}
+const completeUserDailyTask = async (req, res) => {
+    const {username, id} = req.body
+    try {
+        const output = await User.findOne({username})
+        if(!output) {
+            res.status(404).json("No user")
+        }
+        for (let i = 0; i < output.tasks.length; i++) {
+            if (output.tasks[i].task == taskID) {
+                output.tasks[i].status = "Completed"
+            }
+        }
+        await output.save()
         res.status(200).send(output)
     } catch(e) {
         res.status(404).json("Error: ", e)
+    }
+}
 
+const getDailyTask = async (id) => {
+    try {
+        const output = await DailyTask.findById(id)
+        if(!output) {
+            return null
+        }
+        return output
+    } catch(e) {
+        return e
     }
 }
 
@@ -49,4 +82,4 @@ const resetDailyTask = async (req, res) => {
 }
 
 
-module.exports = {addDailyTask, resetDailyTask, getDailyTask}
+module.exports = {addDailyTask, resetDailyTask, getDailyTask, getUserDailyTasks, completeUserDailyTask}
