@@ -1,5 +1,7 @@
 import { Text, View, SafeAreaView } from "react-native";
 import { Link } from "expo-router";
+import Navbar from '../../components/Navbar';
+
 
 import tw from 'twrnc'
 
@@ -23,10 +25,10 @@ export default function Index() {
         <View style={tw`flex gap-4`}>
           <Text style={tw`font-bold text-xl`}>Todays Environment Tasks 🌱</Text>
           <View>
-            {/* Map the tasks from dailyTasks state */}
+            {/* Map the tasks from dailyTasks sddddddddtate */}
           </View>
         </View>
-        
+        <Navbar/>
       </SafeAreaView>
     </View>
   );

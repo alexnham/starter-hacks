@@ -1,5 +1,6 @@
 import { Text, View, SafeAreaView, TextInput } from "react-native";
 import { Link } from "expo-router";
+import Navbar from '../../components/Navbar';
 
 import tw from 'twrnc'
 
@@ -26,6 +27,7 @@ export default function Index() {
           </View>
           <Link href='/signup'>Sign Up</Link>
         </View>
+        <Navbar/>
       </SafeAreaView>
     </View>
   );
