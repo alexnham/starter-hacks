@@ -64,6 +64,7 @@ const createUserDailyTasks = async (req, res) => {
 };
 const completeUserDailyTask = async (req, res) => {
         const { username, id } = req.body;
+        
         try {
             const output = await User.findOne({ username });
             if (!output) {

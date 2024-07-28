@@ -24,6 +24,11 @@ cron.schedule('* 1 * * *', () => {
     updateCommunityTaskID();
 });
 
+app.get('/manualTaskReset', () => {
+    resetDailyTask();
+    updateCommunityTaskID();
+    res.status(200).send('Cron job ran successfully');
+})
 // Routes
 app.get('/leaderboard', getTopUsers);
 

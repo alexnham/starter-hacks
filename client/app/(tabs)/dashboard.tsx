@@ -127,7 +127,7 @@ export default function Index() {
           text: 'OK',
           onPress: async () => {
             try {
-              await axios.post('https://starter-hacks-eeef3ee82963.herokuapp.com/tasks/completeUserDailyTask', { username: user.username, id: id });
+              await axios.post('https://starter-hacks-eeef3ee82963.herokuapp.com/tasks/completeUserDailyTask', { username: user.username, id: id.toString() });
               const userResponse = await axios.post("https://starter-hacks-eeef3ee82963.herokuapp.com/user/getUser", { username: token });
               setUser(userResponse.data);
               console.log(user)
@@ -144,7 +144,7 @@ export default function Index() {
 
   return (
     <View style={tw`flex h-full justify-between`}>
-      <View style={tw`flex flex-col justify-between`}>
+      <View style={tw`flex-[1] flex-col justify-between`}>
         {/* Header of page displaying username and welcome text */}
         <View style={tw`px-8 pt-12 pb-4 rounded-3xl bg-green-600 gap-1`}>
           <Text style={tw`text-white font-bold text-3xl`}>Hey {user ? user.firstName : 'User'},</Text>
