@@ -43,7 +43,7 @@ export default function Index() {
 
   }, []);
 
-
+  console.log(userTasks)
 
   useEffect(() => {
     const handleLogin = async () => {
@@ -204,7 +204,7 @@ export default function Index() {
             <Text style={tw`font-bold text-xl`}>Today's Environment Tasks 🌱</Text>
             <View>
               {/* Example of a daily task */}
-              {user && userTasks && userTasks.map((taskItem: any, index: number) => (
+              {user && userTasks ? userTasks.map((taskItem: any, index: number) => (
                 <TouchableOpacity
                   key={taskItem._id}
                   style={tw`flex flex-row justify-between items-center ${user.tasks[index].status === "Incomplete" ? "bg-white" : "bg-green-800" } py-2 px-4 rounded-full shadow mb-2`} 
@@ -224,7 +224,7 @@ export default function Index() {
 
 
                 </TouchableOpacity>
-              ))}
+              )) : <></>}
             </View>
           </View>
         </SafeAreaView>
