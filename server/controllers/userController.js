@@ -13,7 +13,7 @@ const signup = async (req, res) => {
     }
     const salt = await bcrypt.genSalt(10)
     const encryptedPassword = await bcrypt.hash(password, salt)
-       await User.create({
+    const user = await User.create({
             firstName:firstName,
             lastName:lastName,
             username:username,
@@ -22,7 +22,7 @@ const signup = async (req, res) => {
             tasks: [],
             streak: 0
         })
-        res.status(200).send(username);
+        res.status(200).send(user);
     } catch(error) {
         res.status(404).send(error)
     }

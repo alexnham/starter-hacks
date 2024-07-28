@@ -9,20 +9,17 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
 
-var cron = require('node-cron');
 
 // which community task is the active one?
 // why do we have addTask if we have a task bank in the backend
-const {addCommunityTask, getCommunityTask} = require('./controllers/communityTaskController');
-const { addDailyTask, resetDailyTask } = require('./controllers/dailyTaskController');
-const { signup, login } = require('./controllers/userController');
+
 // Middleware
 app.use(cors());
 app.use(express.json());
 
 // Import controllers
 const { addCommunityTask, getCommunityTask, getAllCommunityTasks, updateCommunityTaskID } = require('./controllers/communityTaskController');
-const { addDailyTask } = require('./controllers/dailyTaskController');
+const { addDailyTask, resetDailyTask } = require('./controllers/dailyTaskController');
 const { signup, login } = require('./controllers/userController');
 
 // Cron job to update CommunityTaskID every minute
@@ -65,6 +62,7 @@ app.post('/tasks/addDailyTask', addDailyTask)
 app.post('/user/signup',signup)
 app.post('/user/login',login)
 app.post('/tasks/resetDailyTask', resetDailyTask)
+
 
 // Connect to MongoDB and start server
 mongoose.connect(process.env.MONG_URI, { useNewUrlParser: true, useUnifiedTopology: true })
