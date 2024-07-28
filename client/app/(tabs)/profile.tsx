@@ -93,6 +93,7 @@ const Profile = () => {
 
     return (
         <SafeAreaView style={tw`bg-white flex-1`}>
+            <Pressable onPress={handleLogout} style={tw`absolute hover:cursor right-4 top-4`}></Pressable>
             {user && <ProfileHeader username={user.firstName + " " + user.lastName} email={user.email} joinDate={user.createdAt} />}
             <View style={tw`p-4`}>
                 <Text style={tw`text-xl font-bold mb-4`}>Overview</Text>

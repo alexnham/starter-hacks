@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { router } from 'expo-router';
 import { saveToken } from './auth';
 import tw from 'twrnc';
+import axios from 'axios'
 
 const Signup = () => {
     const [firstName, setFirstName] = useState('');
@@ -41,6 +42,9 @@ const Signup = () => {
             if (response.ok) {
                 Alert.alert('Success', 'Signup successful');
                 await saveToken(data.username);
+
+                const response = await axios.post('http://localhost:3000/user/createUserDailyTasks', {username: username})
+                console.log(response.data)
                 router.replace('/dashboard');
             } else {
                 Alert.alert('Error', data.message || 'Something went wrong');
