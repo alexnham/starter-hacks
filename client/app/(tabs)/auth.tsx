@@ -8,7 +8,6 @@ const saveToken = async (token:any) => {
   }
 };
 
-
 const getToken = async () => {
     try {
       const token = await AsyncStorage.getItem('@auth_token');
