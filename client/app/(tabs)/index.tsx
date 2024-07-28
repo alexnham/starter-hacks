@@ -92,7 +92,6 @@ export default function Index() {
       
 
       </View>
-      <Navbar/>
     </View>
   );
 }
@@ -117,7 +116,7 @@ const styles = StyleSheet.create({
       paddingHorizontal: 8,
   },
   button: {
-      backgroundColor: '#007BFF',
+      backgroundColor: `rgb(22 163 74)`,
       padding: 10,
       borderRadius: 5,
       alignItems: 'center',

@@ -1,26 +1,53 @@
-import { Text, View, SafeAreaView } from "react-native";
+import React from 'react';
+import { Text, View } from 'react-native';
 import { Link } from 'expo-router';
-import tw from 'twrnc'
-
-
-
-
+import Svg, { Path } from 'react-native-svg';
+import tw from 'twrnc';
 
 const Navbar = () => {
-    return (  
-        <View style={tw`m-0 w-full text-white py-8 flex flex-row bg-green-600 justify-between items-center`}>
-            <View>
-                <Link href="/dashboard">Home</Link>
-            
-            </View>
-            <View>
-                <Link href="/profile">Profile</Link>
-            </View>
-            <View>
-                <Link href="/leaderboard">Leaderboard</Link>
-            </View>
+    return (
+        <View style={tw`w-full py-4 absolute bottom-0 bg-green-600 flex flex-row justify-around items-center shadow-lg`}>
+            <Link href="/dashboard">
+                <View style={tw`flex items-center`}>
+                    <Svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 50 50" fill="none">
+                        <Path
+                            d="M41.6667 35.4169V23.8587C41.6667 22.7455 41.6657 22.1886 41.5304 21.6706C41.4104 21.2115 41.2135 20.7771 40.947 20.3845C40.6463 19.9416 40.2282 19.5742 39.3905 18.8412L29.3905 10.0912C27.835 8.73017 27.0573 8.05001 26.1821 7.79117C25.4108 7.5631 24.5888 7.5631 23.8176 7.79117C22.943 8.04982 22.1664 8.72933 20.6133 10.0883L10.61 18.8412C9.77218 19.5742 9.35426 19.9416 9.05356 20.3845C8.78708 20.7771 8.58865 21.2115 8.4687 21.6706C8.33334 22.1886 8.33334 22.7455 8.33334 23.8587V35.4169C8.33334 37.3583 8.33334 38.3287 8.65051 39.0944C9.0734 40.1153 9.88401 40.9274 10.905 41.3503C11.6707 41.6675 12.6414 41.6675 14.5828 41.6675C16.5242 41.6675 17.496 41.6675 18.2617 41.3503C19.2827 40.9274 20.0931 40.1155 20.516 39.0946C20.8331 38.3288 20.8333 37.3581 20.8333 35.4167V33.3334C20.8333 31.0322 22.6988 29.1667 25 29.1667C27.3012 29.1667 29.1667 31.0322 29.1667 33.3334V35.4167C29.1667 37.3581 29.1667 38.3288 29.4838 39.0946C29.9067 40.1155 30.7173 40.9274 31.7383 41.3503C32.504 41.6675 33.4747 41.6675 35.4161 41.6675C37.3576 41.6675 38.3294 41.6675 39.0951 41.3503C40.116 40.9274 40.9264 40.1153 41.3493 39.0944C41.6665 38.3287 41.6667 37.3583 41.6667 35.4169Z"
+                            stroke="white"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                        />
+                    </Svg>
+                </View>
+            </Link>
+            <Link href="/leaderboard">
+                <View style={tw`flex items-center`}>
+                    <Svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 51 50" fill="none">
+                        <Path 
+                            d="M19.25 22.9166V41.6666M19.25 22.9166H10.0825C8.91574 22.9166 8.33294 22.9166 7.88729 23.1437C7.49528 23.3434 7.17681 23.6619 6.97707 24.0539C6.75 24.4995 6.75 25.0833 6.75 26.2501V41.6666H19.25M19.25 22.9166V11.6668C19.25 10.5 19.25 9.91619 19.4771 9.47054C19.6768 9.07854 19.9953 8.76006 20.3873 8.56032C20.8329 8.33325 21.4157 8.33325 22.5825 8.33325H28.4159C29.5826 8.33325 30.1672 8.33325 30.6129 8.56032C31.0049 8.76006 31.3224 9.07854 31.5221 9.47054C31.7492 9.91619 31.75 10.5 31.75 11.6668V16.6666M19.25 41.6666H31.75M31.75 41.6666L44.25 41.6668V20.0001C44.25 18.8333 44.2492 18.2495 44.0221 17.8039C43.8224 17.4119 43.5061 17.0934 43.1141 16.8937C42.6685 16.6666 42.0834 16.6666 40.9167 16.6666H31.75M31.75 41.6666V16.6666" 
+                            stroke="white" 
+                            strokeWidth="2" 
+                            strokeLinecap="round" 
+                            strokeLinejoin="round"
+                        />
+                    </Svg>
+                </View>
+            </Link>
+            <Link href="/profile">
+                <View style={tw`flex items-center`}>
+                    <Svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 50 50" fill="none">
+                        <Path 
+                            d="M41.6666 43.75C41.6666 37.997 34.2047 33.3333 25 33.3333C15.7952 33.3333 8.33331 37.997 8.33331 43.75M25 27.0833C19.247 27.0833 14.5833 22.4196 14.5833 16.6667C14.5833 10.9137 19.247 6.25 25 6.25C30.7529 6.25 35.4166 10.9137 35.4166 16.6667C35.4166 22.4196 30.7529 27.0833 25 27.0833Z" 
+                            stroke="white" 
+                            strokeWidth="2" 
+                            strokeLinecap="round" 
+                            strokeLinejoin="round"
+                        />
+                    </Svg>
+                </View>
+            </Link>
         </View>
     );
 }
- 
+
 export default Navbar;
