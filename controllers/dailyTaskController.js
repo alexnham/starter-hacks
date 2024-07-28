@@ -23,30 +23,48 @@ const getUserDailyTasks = async (req, res) => {
             tasks.push(await getDailyTask(output.tasks[i].task))
         }
        
-        res.status(200).send(tasks)
+        res.status(200).json(tasks)
     } catch(e) {
         res.status(404).json("Error: ", e)
     }
 }
 const completeUserDailyTask = async (req, res) => {
-    const {username, id} = req.body
+    const { username, id } = req.body;
     try {
-        const output = await User.findOne({username})
-        if(!output) {
-            res.status(404).json("No user")
+        const output = await User.findOne({ username });
+        if (!output) {
+            return res.status(404).json("No user");
         }
+
+        let taskFound = false;
         for (let i = 0; i < output.tasks.length; i++) {
-            if (output.tasks[i].task == taskID) {
-                output.tasks[i].status = "Completed"
-                output.points += output.tasks[i].points
+            if (output.tasks[i].task.toString() === id.toString()) {
+                output.tasks[i].status = "Complete";
+                const task = await DailyTask.findById(id);
+                if (task) {
+                    output.points += task.points;
+                } else {
+                    return res.status(404).json("Task not found");
+                }
+                taskFound = true;
+                break;  // Assuming only one task needs to be updated
             }
         }
-        await output.save()
-        res.status(200).send(output)
-    } catch(e) {
-        res.status(404).json("Error: ", e)
+
+        if (!taskFound) {
+            return res.status(404).json("Task not found in user's tasks");
+        }
+
+        await output.save();
+        console.log("success");
+        console.log(output)
+        return res.status(200).json(output);
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json(e);
     }
-}
+};
+
 
 const getDailyTask = async (id) => {
     try {
@@ -67,7 +85,6 @@ const resetDailyTask = async (req, res) => {
         const dailyTasks = await DailyTask.find({});
 
         for (const user of users) {
-            console.log(user)
             user.tasks = [];
             user.communityTask = 0
             for (let i = 0; i < 3; i++) {
