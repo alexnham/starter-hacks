@@ -38,6 +38,7 @@ const completeUserDailyTask = async (req, res) => {
         for (let i = 0; i < output.tasks.length; i++) {
             if (output.tasks[i].task == taskID) {
                 output.tasks[i].status = "Completed"
+                output.points += output.tasks[i].points
             }
         }
         await output.save()

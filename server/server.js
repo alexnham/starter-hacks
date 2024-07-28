@@ -66,7 +66,7 @@ app.post('/user/getUserDailyTasks',getUserDailyTasks)
 
 
 // Connect to MongoDB and start server
-mongoose.connect(process.env.MONG_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONG_URI)
     .then(() => {
         app.listen(port, () => {
             console.log(`Server listening at http://localhost:${port}`);

@@ -46,10 +46,13 @@ const completeUserCommunityTask = async (req, res) => {
     const {username} = req.body
     try {
         const output = await User.findOne({username})
+        const communityTasks = await CommunityTask.find({});
+        const json = JSON.parse(JSON.stringify(communityTasks, null, 2));
         if(!output) {
             res.status(404).json("No user")
         }
         output.communityTask = 1
+        output.points += json[0].points
         await output.save()
         res.status(200).send(output)
     } catch(e) {
