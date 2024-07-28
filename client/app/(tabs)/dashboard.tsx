@@ -1,4 +1,4 @@
-import { Text, View, SafeAreaView, TouchableOpacity, Alert } from "react-native";
+import { Text, View, SafeAreaView, TouchableOpacity, Alert, ScrollView } from "react-native";
 import { Link } from "expo-router";
 import Navbar from '../../components/Navbar';
 import Task from '../../components/task';
@@ -156,7 +156,7 @@ export default function Index() {
         </View>
 
         {/* Safe area view to hold remainder of dashboard components */}
-        <SafeAreaView style={tw`flex mx-8 my-8 gap-8`}>
+        <ScrollView style={tw`flex mx-8 my-8 gap-8`}>
           {/* View to hold community task section */}
           {communityTask && <View>
             <Text style={tw`font-bold text-xl`}>{communityTask.name} 👫</Text>
@@ -181,7 +181,7 @@ export default function Index() {
             </View>
             {user && (
               <TouchableOpacity
-              style={tw`flex flex-row justify-between items-center ${user.communityTask === 0 ? "bg-white" : "bg-green-800" } py-2 px-4 rounded-full shadow mb-2`} 
+              style={tw`flex flex-row justify-between items-center ${user.communityTask === 0 ? "bg-white" : "bg-green-800" } py-2 px-4 rounded-md shadow mb-2`} 
               onPress={() => user.communityTask === 0 ? completeCommunityTask() : null}
                 disabled={user.communityTask === 1}
               >
@@ -207,7 +207,7 @@ export default function Index() {
               {user && userTasks ? userTasks.map((taskItem: any, index: number) => (
                 <TouchableOpacity
                   key={taskItem._id}
-                  style={tw`flex flex-row justify-between items-center ${user.tasks[index].status === "Incomplete" ? "bg-white" : "bg-green-800" } py-2 px-4 rounded-full shadow mb-2`} 
+                  style={tw`flex flex-row justify-between items-center ${user.tasks[index].status === "Incomplete" ? "bg-white" : "bg-green-800" } py-2 px-4 rounded-md shadow mb-2`} 
                   onPress={() => user.tasks[index].status === "Incomplete" ? completeDailyTask(taskItem._id, taskItem.name) : void (0)
                   }
                 >
@@ -219,15 +219,11 @@ export default function Index() {
                       {taskItem.description} ♻️ {user.tasks[index].status === "Complete"} Saved 🔥
                     </Text>
                   </View>
-                  {user.tasks[index].status === "Incomplete" && <View style={tw`bg-green-800 rounded-full h-6 w-6`} />}
-                  {user.tasks[index].status === "Complete" && <View style={tw`bg-white rounded-full h-6 w-6`} />}
-
-
                 </TouchableOpacity>
               )) : <></>}
             </View>
           </View>
-        </SafeAreaView>
+        </ScrollView>
       </View>
       <Navbar />
     </View>
