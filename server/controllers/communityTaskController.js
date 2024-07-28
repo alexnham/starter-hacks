@@ -1,5 +1,6 @@
 const CommunityTask = require('../models/CommunityTask');
 const CommunityTaskID = require('../models/CommunityTaskID'); // Correctly import the model
+const User = require('../models/User');
 
 const addCommunityTask = async (req, res) => {
     console.log(req.body);
@@ -41,6 +42,23 @@ const getAllCommunityTasks = async (req, res) => {
     }
 };
 
+const completeUserCommunityTask = async (req, res) => {
+    const {username} = req.body
+    try {
+        const output = await User.findOne({username})
+        if(!output) {
+            res.status(404).json("No user")
+        }
+        output.communityTask = 1
+        await output.save()
+        res.status(200).send(output)
+    } catch(e) {
+        res.status(404).json("Error: ", e)
+    }
+}
+
+
+
 const updateCommunityTaskID = async () => {
     try {
         // Generate a random number between 1 and 10
@@ -52,11 +70,22 @@ const updateCommunityTaskID = async () => {
             { index: randomID }, // Assuming the field to update is named 'id'
             { new: true, upsert: true } // Create the document if it doesn't exist
         );
-
+                const users = await User.find({});
+        
+                for (const user of users) {
+                    console.log(user)
+                    if(user.communityTask === 0) {
+                        user.streak === 0
+                    } else {
+                        user.streak += 1
+                        user.communityTask = 0
+                    }
+                    await user.save();
+                }
         console.log('CommunityTaskID updated:', updatedTaskID);
     } catch (error) {
         console.error('Error updating CommunityTaskID:', error);
     }
 };
 
-module.exports = { addCommunityTask, getCommunityTask, getAllCommunityTasks, updateCommunityTaskID };
+module.exports = { addCommunityTask, getCommunityTask, getAllCommunityTasks, updateCommunityTaskID, completeUserCommunityTask};
