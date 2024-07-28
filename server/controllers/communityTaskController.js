@@ -31,7 +31,7 @@ const getCommunityTask = async (req, res) => {
 // New endpoint to get all community tasks
 const getAllCommunityTasks = async (req, res) => {
     try {
-        const communityTasks = await CommunityTask.find({});
+        const communityTasks = await CommunityTask({});
         res.status(200).json(communityTasks);
     } catch (error) {
         console.error(error);
