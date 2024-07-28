@@ -1,5 +1,5 @@
 const express = require('express');
-const cors = require('cors'); // Require CORS package
+const cors = require('cors');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const cron = require('node-cron');
@@ -14,14 +14,14 @@ app.use(cors());
 app.use(express.json());
 
 // Import controllers
-const { addCommunityTask, getCommunityTask, getAllCommunityTasks } = require('./controllers/communityTaskController');
+const { addCommunityTask, getCommunityTask, getAllCommunityTasks, updateCommunityTaskID } = require('./controllers/communityTaskController');
 const { addDailyTask } = require('./controllers/dailyTaskController');
 const { signup, login } = require('./controllers/userController');
 
-// Daily update cron job
+// Cron job to update CommunityTaskID every minute
 cron.schedule('* * * * *', () => {
-    // TODO: update daily community task
-    console.log('Running a task every minute');
+    console.log('Running cron job to update CommunityTaskID');
+    updateCommunityTaskID();
 });
 
 // Routes
@@ -52,7 +52,7 @@ app.get('/getUserTasks', async (req, res) => {
     }
 });
 
-app.get('/tasks/getAllCommunityTasks', getAllCommunityTasks); // New route for getting all community tasks
+app.get('/tasks/getAllCommunityTasks', getAllCommunityTasks);
 app.post('/tasks/addCommunityTask', addCommunityTask);
 app.post('/tasks/addDailyTask', addDailyTask);
 app.post('/user/signup', signup);
