@@ -55,12 +55,13 @@ app.get('/getUserTasks', async (req, res) => {
 app.get('/tasks/getAllCommunityTasks', getAllCommunityTasks);
 app.post('/tasks/addCommunityTask', addCommunityTask);
 app.post('/tasks/addDailyTask', addDailyTask);
+app.post('/tasks/resetDailyTasks', resetDailyTask)
 app.post('/user/signup', signup);
 app.post('/user/login', login);
 
 
 // Connect to MongoDB and start server
-mongoose.connect(process.env.MONG_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONG_URI)
     .then(() => {
         app.listen(port, () => {
             console.log(`Server listening at http://localhost:${port}`);

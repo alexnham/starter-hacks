@@ -20,7 +20,8 @@ const signup = async (req, res) => {
             password: encryptedPassword,
             email:email,
             tasks: [],
-            streak: 0
+            streak: 0,
+            points: 0
         })
         res.status(200).send(user);
     } catch(error) {

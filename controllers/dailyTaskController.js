@@ -12,18 +12,25 @@ const addDailyTask = async (req, res) => {
 }
 
 const resetDailyTask = async (req, res) => {
-    const users = await User.find({})
-    const json = JSON.parse(JSON.stringify(users, null, 2));
-    const dailyTasks = await DailyTask.find({})
-    const dailyJson = JSON.parse(JSON.stringify(dailyTasks, null, 2))
+    try {
+        const users = await User.find({});
+        const dailyTasks = await DailyTask.find({});
 
-    console.log(dailyJson)
-    
-    for(const index in json) [
+        for (const user of users) {
+            console.log(user)
+            user.tasks = [];
+            for (let i = 0; i < 3; i++) {
+                const randomNum = Math.floor(Math.random() * (dailyTasks.length - 2)) + 2;
+                user.tasks.push({ task: dailyTasks[randomNum], status: "Incomplete" });
+            }
+            await user.save();  // Save the updated user document
+        }
 
-        json[index]
-    ]
-    res.status(200).send("hello world")
+        res.status(200).send("tasks reset");
+    } catch (e) {
+        console.log(e);
+        res.status(404).send(e);
+    }
 }
 
 
