@@ -12,7 +12,8 @@ export default function Index() {
   const [password, setPassword] = useState('')
 
   return (
-    <View style={tw`flex h-full bg-slate-100`}> 
+    <View style={tw`flex flex-col justify-between h-full bg-slate-100`}> 
+      <View>
       {/* Header of page displaying username and welcome text */}
       <View style={tw`flex justify-center px-8 py-4 h-32 rounded-3xl bg-green-600 gap-1`}>
         <Text style={tw`text-white font-bold text-3xl`}>Environment App</Text>
@@ -37,8 +38,12 @@ export default function Index() {
           </View>
           <Link style={tw`mt-12 underline`} href='/signup'>Sign Up</Link>
         </View>
-        <Navbar/>
+        
       </SafeAreaView>
+      
+
+      </View>
+      <Navbar/>
     </View>
   );
 }
