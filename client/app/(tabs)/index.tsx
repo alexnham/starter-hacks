@@ -3,7 +3,13 @@ import { Link } from "expo-router";
 
 import tw from 'twrnc'
 
+import { useState } from "react";
+
 export default function Index() {
+
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
   return (
     <View style={tw`flex h-full bg-slate-100`}> 
       {/* Header of page displaying username and welcome text */}
@@ -17,14 +23,18 @@ export default function Index() {
           <View style={tw`w-full flex gap-5`}>
             <TextInput 
               placeholder="Enter email"
-              style={tw`bg-white w-full h-12 rounded-md text-lg px-4 py-1`}
+              style={tw`shadow-md bg-white w-full h-12 rounded-md text-lg px-4 py-1`}
+              value={`${email}`}
+              onChangeText={newText => setEmail(newText)}
             />
             <TextInput 
               placeholder="Enter password"
-              style={tw`bg-white w-full h-12 rounded-md text-lg px-4 py-1`}
+              style={tw`shadow-md shadow-inner bg-white w-full h-12 rounded-md text-lg px-4 py-1`}
+              value={`${password}`}
+              onChangeText={newText => setPassword(newText)}
             />
           </View>
-          <Link href='/signup'>Sign Up</Link>
+          <Link style={tw`mt-12 underline`} href='/signup'>Sign Up</Link>
         </View>
       </SafeAreaView>
     </View>
