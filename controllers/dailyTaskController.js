@@ -54,7 +54,7 @@ const createUserDailyTasks = async (req, res) => {
                 user.tasks.push({ task: dailyTasks[randomNum], status: "Incomplete" });
             }
         }
-        
+
         await user.save();
         console.log("HI")
         res.status(200).json(tasks);
@@ -77,21 +77,18 @@ const completeUserDailyTask = async (req, res) => {
                     const task = await DailyTask.findById(id);
                     if (task) {
                         output.points += task.points;
-                    } else {
-                        return res.status(404).json("Task not found");
+                        taskFound = true;
                     }
-                    taskFound = true;
                     break;  // Assuming only one task needs to be updated
                 }
             }
 
             if (!taskFound) {
-                return res.status(404).json("Task not found in user's tasks");
+                return res.status(405).json("Task not found in user's tasks");
             }
 
             await output.save();
             console.log("success");
-            console.log(output)
             return res.status(200).json(output);
         } catch (e) {
             console.log(e);
@@ -117,15 +114,18 @@ const completeUserDailyTask = async (req, res) => {
         try {
             const users = await User.find({});
             const dailyTasks = await DailyTask.find({});
-
             for (const user of users) {
-                user.tasks = [];
-                user.communityTask = 0
+                const tasks = [];
+                const communityTask = 0;
                 for (let i = 0; i < 3; i++) {
                     const randomNum = Math.floor(Math.random() * (dailyTasks.length - 2)) + 2;
-                    user.tasks.push({ task: dailyTasks[randomNum], status: "Incomplete" });
+                    tasks.push({ task: dailyTasks[randomNum], status: "Incomplete" });
                 }
-                await user.save();  // Save the updated user document
+                await User.findOneAndUpdate(
+                    { _id: user._id },
+                    { $set: { tasks, communityTask } },
+                    { new: true, useFindAndModify: false }
+                );
             }
             console.log("tasks reset");
             //res.status(200).send("tasks reset");
@@ -133,7 +133,8 @@ const completeUserDailyTask = async (req, res) => {
             console.log(e);
             //res.status(404).send(e);
         }
-    }
+    };
+    
 
 
     module.exports = { addDailyTask, resetDailyTask, getDailyTask, getUserDailyTasks, completeUserDailyTask, createUserDailyTasks }
