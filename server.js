@@ -14,7 +14,7 @@ app.use(cors());
 app.use(express.json());
 
 // Import controllers
-const { addCommunityTask, getCommunityTask, getAllCommunityTasks, updateCommunityTaskID } = require('./controllers/communityTaskController');
+const { addCommunityTask, getCommunityTask, getAllCommunityTasks, updateCommunityTaskID, completeUserCommunityTask} = require('./controllers/communityTaskController');
 const { addDailyTask, resetDailyTask, completeUserDailyTask, getUserDailyTasks } = require('./controllers/dailyTaskController');
 const { signup, login, getTopUsers, updateUserStats } = require('./controllers/userController');
 
@@ -51,6 +51,10 @@ app.get('/getUserTasks', async (req, res) => {
         res.sendStatus(500);
     }
 });
+
+app.post('/tasks/completeUserDailyTask', completeUserDailyTask);
+app.post('/tasks/completeUserCommunityTask', completeUserCommunityTask);
+
 app.get('/tasks/getAllCommunityTasks', getAllCommunityTasks);
 app.get('/tasks/resetDailyTask', resetDailyTask);
 app.get('/tasks/getCommunityTask', getCommunityTask);
