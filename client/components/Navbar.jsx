@@ -1,5 +1,6 @@
 import { Text, View, SafeAreaView } from "react-native";
 import { Link } from 'expo-router';
+import tw from 'twrnc'
 
 
 
